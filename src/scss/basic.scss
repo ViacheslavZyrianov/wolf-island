@@ -1,0 +1,73 @@
+*{
+  box-sizing: border-box;
+}
+
+html,body{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.wolf-island{
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../img/texture-water.gif');
+}
+
+canvas{
+  border: 1px solid #000000;
+}
+
+table{
+  position: relative;
+  border-collapse: collapse;
+  user-select: none;
+  background-image: url('../img/texture-land.jpg');
+}
+
+table td{
+  position: relative;
+  //border: 1px solid #000000;
+  border: 0;
+  background-size: auto 60%;
+  background-position: center 8px;
+  background-repeat: no-repeat;
+
+  .cell-coords{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 12px;
+    display: none;
+  }
+
+  &[data-type="hunter"]{
+    &[data-sex="male"]{
+      background-image: url('../img/wolf-male.png');
+    }
+    &[data-sex="female"]{
+      background-image: url('../img/wolf-female.png');
+    }
+  }
+
+  &[data-type="victim"]{
+    &[data-sex="male"]{
+      background-image: url('../img/rabbit-male.png');
+    }
+    &[data-sex="female"]{
+      background-image: url('../img/rabbit-female.png');
+    }
+  }
+
+  &[data-type="grass"]{
+    background-image: url('../img/grass.png');
+  }
+
+  &[data-type="carrot"]{
+    background-image: url('../img/carrot.png');
+  }
+
+}
