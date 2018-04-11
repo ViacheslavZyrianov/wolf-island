@@ -5,12 +5,15 @@ export default class Victim extends Animal{
     constructor(){
         super();
         this.type = 'victim';
-        this.health = 70;
+        this.health = 5;
         this.speed = 1;
+
+        this.eat();
     }
 
-    makeMove(){
-        super.makeMove();
+    eat(){
+      super.feed();
+      // console.log('Victim', this);
     }
 
 }

@@ -1,50 +1,44 @@
 import Field from './Field/Field';
-import Victim from './Animals/Victim';
+import Animal from './Animals/Animal';
 import Hunter from './Animals/Hunter';
-import DrawAnimals from './Draw/DrawAnimals';
-import DrawField from './Draw/DrawField';
+import Victim from './Animals/Victim';
 import Environment from './Environment/Environment';
 
 export default class Game {
 
-    constructor() {
-        this.victimCount = 2;
-        this.hunterCount = 2;
-        this.animals = [];
-        this.start();
+  constructor() {
+    this.victimCount = 1;
+    this.hunterCount = 1;
+
+    this.start();
+  }
+
+  start() {
+    const field = new Field();
+    const animals = [];
+
+    // create victims
+    for (let i = 0; i < this.victimCount; i++) {
+      const victim = new Victim();
+      victim.setOnField(field);
+      animals.push(victim);
     }
 
-    start() {
-
-        const field = new Field();
-
-        new DrawField(field.size);
-        new Environment(field);
-
-        // create victims
-        for (let i = 0; i < this.victimCount; i++) {
-            const victim = new Victim();
-            this.animals.push(victim);
-            victim.setField(field);
-        }
-
-        // create hunters
-        for (let i = 0; i < this.hunterCount; i++) {
-            const hunter = new Hunter();
-            this.animals.push(hunter);
-            hunter.setField(field);
-        }
-
-        new DrawAnimals(this.animals);
-
-        const that = this;
-        setInterval(()=>{
-            that.animals.forEach(animal=>{
-                animal.move();
-            });
-            new DrawAnimals(this.animals);
-        }, 500)
-
+    // create hunters
+    for (let i = 0; i < this.hunterCount; i++) {
+      const hunter = new Hunter();
+      hunter.setOnField(field);
+      animals.push(hunter);
     }
+
+    window.moveAnimals = () => {
+      animals.forEach(animal=>{
+        Animal.move(animal);
+      });
+      field.updateCells(animals)
+      // draw
+    }
+
+  }
 
 }

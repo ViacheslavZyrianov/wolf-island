@@ -1,31 +1,43 @@
 export default class DrawAnimals {
 
-    constructor(animals) {
-        this.animals = animals;
-        this.tableRows = document.querySelectorAll('.wolf-island table tbody tr');
-        this.paint();
-    }
+  constructor(animals) {
+    this.animals = animals;
+    this.tableRows = document.querySelectorAll('.wolf-island table tbody tr');
+    this.paint();
+  }
 
-    paint() {
-        this.clear();
-        this.animals.forEach(animal => {
-            const cell = this.tableRows[animal.position.y].querySelectorAll('td')[animal.position.x];
-            cell.setAttribute('data-type', animal.type);
-            cell.setAttribute('data-sex', animal.sex);
-        });
-    }
+  paint() {
+    this.clearCells();
+    this.animals.forEach(animal => {
+      const cell = this.tableRows[animal.position.y].querySelectorAll('td')[animal.position.x];
+      if (animal.isAlive) {
+        cell.setAttribute('data-alive', animal.isAlive);
+        cell.setAttribute('data-type', animal.type);
+        cell.setAttribute('data-sex', animal.sex);
+        cell.setAttribute('data-health', animal.health);
+      } else {
+        this.clearCell(cell);
+      }
+    });
+  }
 
-    clear() {
-        const fieldSize = this.tableRows.length;
-        for (let i = 0; i < fieldSize; i++) {
-            for (let j = 0; j < fieldSize; j++) {
-                const cell = this.tableRows[i].querySelectorAll('td')[j];
-                if(cell.getAttribute('data-sex')){
-                    cell.setAttribute('data-type', '');
-                    cell.setAttribute('data-sex', '');
-                }
-            }
+  clearCells() {
+    const fieldSize = this.tableRows.length;
+    for (let i = 0; i < fieldSize; i++) {
+      for (let j = 0; j < fieldSize; j++) {
+        const cell = this.tableRows[i].querySelectorAll('td')[j];
+        if (cell.getAttribute('data-sex')) {
+          this.clearCell(cell);
         }
+      }
     }
+  }
+
+  clearCell(cell){
+    cell.removeAttribute('data-type');
+    cell.removeAttribute('data-sex');
+    cell.removeAttribute('data-health');
+    cell.removeAttribute('data-alive');
+  }
 
 }
