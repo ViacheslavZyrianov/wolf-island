@@ -1,14 +1,19 @@
-export const random = (min, max) => {
-    return Math.round(min + Math.random() * (max - min));
+export const rnd = (min, max) => {
+  return Math.round(min + Math.random() * (max - min));
 };
 
-export const randomCellsCoordinates = (qnt, maxCellNum) => {
-    let randomCellsCoordinates = [];
-    for(let i=0;i<qnt;i++){
-        randomCellsCoordinates.push({
-            x: random(0,maxCellNum),
-            y: random(0,maxCellNum),
-        });
-    }
-    return randomCellsCoordinates;
+export const rndCellsCoords = (qnt, coordinates) => {
+  let coords = coordinates.slice(0);
+  coords.sort(()=>{
+    return Math.random() > 0.5;
+  });
+  coords = coords.slice(0,qnt);
+  return coords;
+};
+
+export const rndCellCoords = max => {
+  return {
+    x: rnd(0, max),
+    y: rnd(0, max),
+  }
 };

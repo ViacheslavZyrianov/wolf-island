@@ -1,15 +1,10 @@
-import {randomCellsCoordinates} from "../random";
-
 export default class Grass{
 
-    constructor(field){
-        this.field = field;
+    constructor(data){
+        this.value = data.value;
+        this.coordinates = data.coordinates;
 
-        this.setGrass();
-    }
-
-    setGrass(){
-        this.field.grass = randomCellsCoordinates(this.grassQNT)
+        // this.createGrass();
     }
 
 }

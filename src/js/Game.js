@@ -14,7 +14,13 @@ export default class Game {
   }
 
   start() {
+
+    // create field
     const field = new Field();
+
+    // create environment
+    const environment = new Environment(field);
+
     const animals = [];
 
     // create victims
@@ -31,12 +37,20 @@ export default class Game {
       animals.push(hunter);
     }
 
+    // place grass
+
+
     window.moveAnimals = () => {
       animals.forEach(animal=>{
         Animal.move(animal);
       });
-      field.updateCells(animals)
+      field.updateCells([...animals, ...field.grass]);
+
       // draw
+      field.cells.forEach(cell=>{
+        // console.log(cell.coordinates, cell.content);
+      });
+
     }
 
   }

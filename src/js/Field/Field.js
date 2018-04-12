@@ -2,7 +2,7 @@ import Cell from './Cell';
 
 export default class Field {
   constructor() {
-    this.size = 3; // means SIZExSIZE
+    this.size = 5; // means SIZExSIZE
     this.cells = [];
 
     this.createCells();
@@ -25,14 +25,27 @@ export default class Field {
 
   updateCells(cellsData) {
     this.cells.forEach(cell => {
-      cell.content = null;
+      // const cellContent = cell.content;
+
+      // clear all animals
+      // if(cellContent.length>0){ // cell is not empty
+      //   cellContent.forEach(content=>{
+      //     cellContent.length = 0;
+      //   });
+      // }
+
+      // clear all
+      cell.content = [];
+
+      // place all cell data
       cellsData.forEach(cellData => {
-        if (cellData.position.x === cell.coordinates.x && cellData.position.y === cell.coordinates.y) {
-          cell.content = cellData;
+        if (cellData.coordinates.x === cell.coordinates.x && cellData.coordinates.y === cell.coordinates.y) {
+          cell.content.push(cellData);
         }
       });
+
     });
-    console.log(this.cells);
+
   }
 
   isCellAvailableForMove(x, y) {
